@@ -1,3 +1,17 @@
+# TrustTunnelFlutterClient: per-app routing (unofficial fork)
+
+Unofficial fork of [TrustTunnelFlutterClient](https://github.com/TrustTunnel/TrustTunnelFlutterClient)
+that adds **per-app routing** on Android: choose which apps go through the VPN
+(modes: off / only selected / all except selected).
+
+- Download the APK: [Releases](https://github.com/olteanu2/TrustTunnelFlutterClient-per-app-routing/releases)
+- Build instructions: [BUILDING.md](BUILDING.md)
+- Native core with the Android changes: [olteanu2/TrustTunnelClient](https://github.com/olteanu2/TrustTunnelClient)
+- Android only. Not affiliated with AdGuard.
+- The APK uses the same `applicationId` as the official app, so uninstall the official app before installing it.
+
+---
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adguardcdn.com/website/github.com/TrustTunnel/logo_dark.svg" width="300px" alt="TrustTunnel" />
