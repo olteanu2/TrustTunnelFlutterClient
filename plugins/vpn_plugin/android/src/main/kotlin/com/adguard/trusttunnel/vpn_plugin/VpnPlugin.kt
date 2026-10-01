@@ -10,6 +10,7 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
+import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 
 class VpnPlugin :
@@ -22,6 +23,7 @@ class VpnPlugin :
         private const val REQ_VPN_PREPARE = 1001
         private const val STATE_CHANNEL_NAME = "vpn_plugin_event_channel"
         private const val QUERY_LOG_CHANNEL_NAME = "vpn_plugin_event_channel_query_log"
+        private const val APPS_CHANNEL_NAME = "vpn_plugin_apps_channel"
     }
 
     private lateinit var appContext: Context
@@ -29,7 +31,8 @@ class VpnPlugin :
 
     private var stateChannel: EventChannel? = null
     private var queryLogChannel: EventChannel? = null
-    
+    private var appsChannel: MethodChannel? = null
+
     private lateinit var vpnImpl: NativeVpnImpl
 
     private lateinit var deepLinkImpl: DeepLinkImpl
@@ -55,6 +58,10 @@ class VpnPlugin :
         queryLogChannel = EventChannel(messenger, QUERY_LOG_CHANNEL_NAME).apply {
             setStreamHandler(vpnImpl.queryLogHandler)
         }
+
+        appsChannel = MethodChannel(messenger, APPS_CHANNEL_NAME).apply {
+            setMethodCallHandler(InstalledAppsHandler(appContext))
+        }
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -62,6 +69,9 @@ class VpnPlugin :
         queryLogChannel?.setStreamHandler(null)
         stateChannel = null
         queryLogChannel = null
+
+        appsChannel?.setMethodCallHandler(null)
+        appsChannel = null
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {

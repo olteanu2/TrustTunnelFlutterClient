@@ -15,14 +15,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/TrustTunnel/TrustTunnelClient")
-            credentials {
-                username = ""
-                password = getGprProp("gpr.key")
-            }
-            authentication { basic(BasicAuthentication) }
-        }
+        maven { url = uri("https://olteanu2.github.io/maven") }
     }
 }
 

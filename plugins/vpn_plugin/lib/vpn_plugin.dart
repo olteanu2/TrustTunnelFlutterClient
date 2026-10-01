@@ -7,9 +7,12 @@ import 'package:vpn_plugin/data/logs_reader.dart';
 import 'package:vpn_plugin/domain/configuration_codec.dart';
 import 'package:vpn_plugin/domain/query_log_encoder.dart';
 import 'package:vpn_plugin/models/configuration.dart';
+import 'package:vpn_plugin/models/installed_app.dart';
 import 'package:vpn_plugin/models/logs/log_record.dart';
 import 'package:vpn_plugin/models/query_log_row.dart';
 import 'package:vpn_plugin/platform_api.g.dart';
+
+export 'package:vpn_plugin/models/installed_app.dart';
 
 /// {@template vpn_plugin}
 /// A plugin that provides VPN functionality across multiple platforms.
@@ -82,6 +85,9 @@ abstract class VpnPlugin {
   Future<List<String>> fetchLogsPath();
 
   Future<void> clearLogs();
+
+  /// Returns the list of apps installed on the device (Android only).
+  Future<List<InstalledApp>> getInstalledApps();
 }
 
 /// {@template vpn_plugin_impl}
@@ -110,6 +116,7 @@ class VpnPluginImpl implements VpnPlugin {
   final EventChannel _vpnChannel;
   final EventChannel _queryLogChannel;
   final LogsReader _logsReader;
+  final MethodChannel _appsChannel = const MethodChannel('vpn_plugin_apps_channel');
   SharedPreferences? _storage;
 
   @override
@@ -208,5 +215,11 @@ class VpnPluginImpl implements VpnPlugin {
     }
 
     await _storage?.remove('logs_paths_vpn_plugin');
+  }
+
+  @override
+  Future<List<InstalledApp>> getInstalledApps() async {
+    final raw = await _appsChannel.invokeListMethod<Map<Object?, Object?>>('getInstalledApps');
+    return (raw ?? const []).map(InstalledApp.fromMap).toList();
   }
 }

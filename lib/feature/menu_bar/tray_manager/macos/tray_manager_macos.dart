@@ -127,7 +127,7 @@ final class TrayManagerMacOS {
         onTap: () => unawaited(callbacks.onOpenTrustTunnelPressed()),
       ),
       TrayButton(
-        title: data.localization.routing,
+        title: data.localization.ipRouting,
         onTap: () => unawaited(callbacks.onRoutingPressed()),
       ),
       TrayButton(

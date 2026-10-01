@@ -10,6 +10,7 @@ import 'package:trusttunnel/data/datasources/app_state_logging_datasource.dart';
 import 'package:trusttunnel/data/datasources/auto_connect_on_launch_settings_datasource.dart';
 import 'package:trusttunnel/data/datasources/certificate_datasource.dart';
 import 'package:trusttunnel/data/datasources/launch_at_login_datasource.dart';
+import 'package:trusttunnel/data/datasources/local_sources/app_routing_datasource.dart';
 import 'package:trusttunnel/data/datasources/local_sources/app_state_logging_datasource_impl.dart';
 import 'package:trusttunnel/data/datasources/local_sources/auto_connect_on_launch_settings_datasource_impl.dart';
 import 'package:trusttunnel/data/datasources/local_sources/certificate_datasource_impl.dart';
@@ -53,6 +54,8 @@ abstract class DependencyFactory {
   ServerDataSource get serverDataSource;
 
   RoutingDataSource get routingDataSource;
+
+  AppRoutingDataSource get appRoutingDataSource;
 
   VpnDataSource get vpnDataSource;
 
@@ -105,6 +108,8 @@ class DependencyFactoryImpl implements DependencyFactory {
 
   RoutingDataSource? _routingDataSource;
 
+  AppRoutingDataSource? _appRoutingDataSource;
+
   VpnDataSource? _vpnDataSource;
 
   CertificateDataSource? _certificateDataSource;
@@ -149,6 +154,9 @@ class DependencyFactoryImpl implements DependencyFactory {
   RoutingDataSource get routingDataSource => _routingDataSource ??= RoutingDataSourceImpl(
     database: database,
   );
+
+  @override
+  AppRoutingDataSource get appRoutingDataSource => _appRoutingDataSource ??= AppRoutingDataSourceImpl();
 
   @override
   VpnDataSource get vpnDataSource => _vpnDataSource ??= VpnDataSourceImpl(

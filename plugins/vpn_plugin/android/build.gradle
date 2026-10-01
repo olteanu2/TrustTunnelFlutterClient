@@ -30,13 +30,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/TrustTunnel/TrustTunnelClient")
-            credentials {
-                username = ""
-                password = getGprProp("gpr.key")
-            }
-        }
+        maven { url = uri("https://olteanu2.github.io/maven") }
     }
 }
 
@@ -68,5 +62,5 @@ android {
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.mockito:mockito-core:5.0.0")
-    implementation("com.adguard.trusttunnel:trusttunnel-client-android:1.1.5-rc.6")
+    implementation("com.adguard.trusttunnel:trusttunnel-client-android:1.3.0-app-routing.1")
 }

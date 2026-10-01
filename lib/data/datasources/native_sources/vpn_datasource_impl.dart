@@ -99,6 +99,8 @@ class VpnDataSourceImpl implements VpnDataSource {
     required ServerData server,
     required RoutingProfileData routingProfile,
     required List<String> excludedRoutes,
+    required List<String> allowedApps,
+    required List<String> disallowedApps,
     required VpnConfigurationLogLevel logLevel,
   }) async {
     final exclusions = _getExclusionsByMode(routingProfile);
@@ -131,6 +133,8 @@ class VpnDataSourceImpl implements VpnDataSource {
         endpoint: endPoint,
         tun: Tun(
           excludedRoutes: excludedRoutes,
+          allowedApps: allowedApps,
+          disallowedApps: disallowedApps,
         ),
         socks: const Socks(),
       ),
@@ -176,6 +180,8 @@ class VpnDataSourceImpl implements VpnDataSource {
     required ServerData server,
     required RoutingProfileData routingProfile,
     required List<String> excludedRoutes,
+    required List<String> allowedApps,
+    required List<String> disallowedApps,
     required VpnConfigurationLogLevel logLevel,
   }) async {
     final exclusions = _getExclusionsByMode(routingProfile);
@@ -208,6 +214,8 @@ class VpnDataSourceImpl implements VpnDataSource {
         endpoint: endPoint,
         tun: Tun(
           excludedRoutes: excludedRoutes,
+          allowedApps: allowedApps,
+          disallowedApps: disallowedApps,
         ),
         socks: const Socks(),
       ),

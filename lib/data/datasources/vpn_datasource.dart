@@ -52,6 +52,8 @@ abstract class VpnDataSource {
     required ServerData server,
     required RoutingProfileData routingProfile,
     required List<String> excludedRoutes,
+    required List<String> allowedApps,
+    required List<String> disallowedApps,
     required VpnConfigurationLogLevel logLevel,
   });
 
@@ -74,6 +76,8 @@ abstract class VpnDataSource {
     required ServerData server,
     required RoutingProfileData routingProfile,
     required List<String> excludedRoutes,
+    required List<String> allowedApps,
+    required List<String> disallowedApps,
     required VpnConfigurationLogLevel logLevel,
   });
 

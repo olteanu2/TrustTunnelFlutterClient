@@ -11,8 +11,12 @@ abstract class NavigationUtils {
       'label': context.ln.servers,
     },
     {
+      'icon': AssetIcons.menu, // TODO: replace with AssetIcons.apps after adding the icon
+      'label': context.ln.appRouting,
+    },
+    {
       'icon': AssetIcons.route,
-      'label': context.ln.routing,
+      'label': context.ln.ipRouting,
     },
     {
       'icon': AssetIcons.settings,

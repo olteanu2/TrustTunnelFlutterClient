@@ -112,6 +112,12 @@ abstract final class ConfigurationCodecKeys {
   /// TUN MTU key.
   static const mtuSize = 'mtu_size';
 
+  /// TUN allowed apps list key.
+  static const allowedApps = 'allowed_apps';
+
+  /// TUN disallowed apps list key.
+  static const disallowedApps = 'disallowed_apps';
+
   // Socks keys
   /// SOCKS listener bind address key.
   static const socksAddress = 'address';
@@ -196,6 +202,8 @@ final class ConfigurationEncoder extends Converter<Configuration, String> {
     tun.setStringList(ConfigurationCodecKeys.includedRoutes, config.tun.includedRoutes);
     tun.setStringList(ConfigurationCodecKeys.excludedRoutes, config.tun.excludedRoutes);
     tun.setInt(ConfigurationCodecKeys.mtuSize, config.tun.mtuSize);
+    tun.setStringList(ConfigurationCodecKeys.allowedApps, config.tun.allowedApps);
+    tun.setStringList(ConfigurationCodecKeys.disallowedApps, config.tun.disallowedApps);
 
     // final IniSection socks = document.section(ConfigurationCodecKeys.socksSection);
     // socks.setString(ConfigurationCodecKeys.socksAddress, config.socks.address);
@@ -280,6 +288,8 @@ final class ConfigurationDecoder extends Converter<String, Configuration> {
         tun.getStringList(ConfigurationCodecKeys.includedRoutes) ?? IniConst.defaultTunRoutes;
     final List<String> excludedRoutes = tun.getStringList(ConfigurationCodecKeys.excludedRoutes) ?? const <String>[];
     final int mtuSize = tun.getInt(ConfigurationCodecKeys.mtuSize) ?? IniConst.defaultTunMtu;
+    final List<String> allowedApps = tun.getStringList(ConfigurationCodecKeys.allowedApps) ?? const <String>[];
+    final List<String> disallowedApps = tun.getStringList(ConfigurationCodecKeys.disallowedApps) ?? const <String>[];
 
     final String socksAddress = socks.getString(ConfigurationCodecKeys.socksAddress) ?? IniConst.defaultSocksAddress;
     final String socksUsername = socks.getString(ConfigurationCodecKeys.socksUsername) ?? '';
@@ -329,6 +339,8 @@ final class ConfigurationDecoder extends Converter<String, Configuration> {
         includedRoutes: includedRoutes,
         excludedRoutes: excludedRoutes,
         mtuSize: mtuSize,
+        allowedApps: allowedApps,
+        disallowedApps: disallowedApps,
       ),
       socks: Socks(
         address: socksAddress,

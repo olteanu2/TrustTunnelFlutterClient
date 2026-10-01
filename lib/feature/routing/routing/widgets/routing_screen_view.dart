@@ -41,7 +41,7 @@ class _RoutingScreenViewState extends State<RoutingScreenView> {
     child: ScaffoldMessenger(
       child: Scaffold(
         appBar: CustomAppBar(
-          title: context.ln.routing,
+          title: context.ln.ipRouting,
         ),
         body: ListView.builder(
           itemBuilder: (context, index) => Column(

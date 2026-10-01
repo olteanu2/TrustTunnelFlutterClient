@@ -33,6 +33,10 @@ final class Tun {
   /// {@endtemplate}
   final int mtuSize;
 
+  final List<String> allowedApps;
+
+  final List<String> disallowedApps;
+
   /// {@macro tun}
   const Tun({
     this.includedRoutes = const [
@@ -41,10 +45,12 @@ final class Tun {
     ],
     this.excludedRoutes = const [],
     this.mtuSize = 1350,
+    this.allowedApps = const [],
+    this.disallowedApps = const [],
   }) : assert(mtuSize > 0, 'mtuSize must be greater than 0');
 
   @override
-  String toString() => 'Tun(includedRoutes: $includedRoutes, excludedRoutes: $excludedRoutes, mtuSize: $mtuSize)';
+  String toString() => 'Tun(includedRoutes: $includedRoutes, excludedRoutes: $excludedRoutes, mtuSize: $mtuSize, allowedApps: $allowedApps, disallowedApps: $disallowedApps)';
 
   @override
   bool operator ==(covariant Tun other) {
@@ -52,7 +58,9 @@ final class Tun {
 
     return listEquals(other.includedRoutes, includedRoutes) &&
         listEquals(other.excludedRoutes, excludedRoutes) &&
-        other.mtuSize == mtuSize;
+        other.mtuSize == mtuSize &&
+        listEquals(other.allowedApps, allowedApps) &&
+        listEquals(other.disallowedApps, disallowedApps);
   }
 
   @override
@@ -60,5 +68,7 @@ final class Tun {
     includedRoutes,
     excludedRoutes,
     mtuSize,
+    allowedApps,
+    disallowedApps,
   ]);
 }

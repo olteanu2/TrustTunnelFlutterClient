@@ -14,6 +14,7 @@ import 'package:trusttunnel/feature/navigation/widgets/custom_navigation_rail.da
 import 'package:trusttunnel/feature/routing/routing/widgets/routing_screen.dart';
 import 'package:trusttunnel/feature/server/server_details/widgets/server_details_popup.dart';
 import 'package:trusttunnel/feature/server/servers/widget/servers_screen.dart';
+import 'package:trusttunnel/feature/settings/app_routing/widgets/app_routing_screen.dart';
 import 'package:trusttunnel/feature/settings/logs_manager/widgets/scope/logs_manager_scope.dart';
 import 'package:trusttunnel/feature/settings/query_log/widgets/query_log_screen.dart';
 import 'package:trusttunnel/feature/settings/settings/settings_screen.dart';
@@ -121,8 +122,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
     0 => ServersScreen(
       deepLinkData: deepLinkData,
     ),
-    1 => const RoutingScreen(),
-    2 => const SettingsScreen(),
+    1 => const AppRoutingScreen(),
+    2 => const RoutingScreen(),
+    3 => const SettingsScreen(),
     _ => throw Exception('Invalid index: $selectedIndex'),
   };
 
@@ -160,14 +162,19 @@ class _NavigationScreenState extends State<NavigationScreen> {
           0,
           force: true,
         );
-      case AppRoutes.routing:
+      case AppRoutes.appRouting:
         await _setTabRoute(
           1,
           force: true,
         );
-      case AppRoutes.settings:
+      case AppRoutes.routing:
         await _setTabRoute(
           2,
+          force: true,
+        );
+      case AppRoutes.settings:
+        await _setTabRoute(
+          3,
           force: true,
         );
       case AppRoutes.serverDetails:
@@ -181,7 +188,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         );
       case AppRoutes.queryLog:
         await _setTabRoute(
-          2,
+          3,
           force: true,
         );
         await _pushOnInnerNavigator(

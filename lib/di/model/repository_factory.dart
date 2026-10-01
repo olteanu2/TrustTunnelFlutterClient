@@ -1,3 +1,4 @@
+import 'package:trusttunnel/data/repository/app_routing_repository.dart';
 import 'package:trusttunnel/data/repository/auto_connect_on_launch_settings_repository.dart';
 import 'package:trusttunnel/data/repository/deep_link_repository.dart';
 import 'package:trusttunnel/data/repository/export_logs_repository.dart';
@@ -16,6 +17,8 @@ abstract class RepositoryFactory {
   SettingsRepository get settingsRepository;
 
   RoutingRepository get routingRepository;
+
+  AppRoutingRepository get appRoutingRepository;
 
   VpnRepository get vpnRepository;
 
@@ -44,6 +47,8 @@ class RepositoryFactoryImpl implements RepositoryFactory {
   SettingsRepository? _settingsRepository;
 
   RoutingRepository? _routingRepository;
+
+  AppRoutingRepository? _appRoutingRepository;
 
   VpnRepository? _vpnRepository;
 
@@ -76,8 +81,14 @@ class RepositoryFactoryImpl implements RepositoryFactory {
   );
 
   @override
+  AppRoutingRepository get appRoutingRepository => _appRoutingRepository ??= AppRoutingRepositoryImpl(
+    dataSource: _dependencyFactory.appRoutingDataSource,
+  );
+
+  @override
   VpnRepository get vpnRepository => _vpnRepository ??= VpnRepositoryImpl(
     vpnDataSource: _dependencyFactory.vpnDataSource,
+    appRoutingDataSource: _dependencyFactory.appRoutingDataSource,
   );
 
   @override
