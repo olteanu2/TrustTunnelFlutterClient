@@ -6,7 +6,7 @@ that adds **per-app routing** on Android: choose which apps go through the VPN
 
 - Download the APK: [Releases](https://github.com/olteanu2/TrustTunnelFlutterClient-per-app-routing/releases)
 - Build instructions: [BUILDING.md](BUILDING.md)
-- Native core with the Android changes: [olteanu2/TrustTunnelClient](https://github.com/olteanu2/TrustTunnelClient-per-app-routing)
+- Native core with the Android changes: [olteanu2/TrustTunnelClient-per-app-routing](https://github.com/olteanu2/TrustTunnelClient-per-app-routing)
 - Android only. Not affiliated with AdGuard.
 - The APK uses the same `applicationId` as the official app, so uninstall the official app before installing it.
 
@@ -60,7 +60,7 @@ Whether you are setting up your first self-hosted VPN or operating your own infr
     - [Building](#building)
       - [1. Clone repository](#1-clone-repository)
       - [2. Use make to initialize project](#2-use-make-to-initialize-project)
-      - [3. Configure GitHub Packages access](#3-configure-github-packages-access)
+      - [3. Native library](#3-native-library)
       - [4. Android: configure signing](#4-android-configure-signing)
       - [5. iOS: install pods and configure signing](#5-ios-install-pods-and-configure-signing)
       - [6. Build or run the application](#6-build-or-run-the-application)
@@ -102,32 +102,9 @@ cd TrustTunnelFlutterClient
 make init
 ```
 
-#### 3. Configure GitHub Packages access
+#### 3. Native library
 
-Project depends on artifacts published in GitHub Packages.
-To download them, you must provide a **personal access token** via environment variables used by Maven.
-
-**Create a personal access token**
-
-Create a token here:
-https://github.com/settings/tokens
-
-Required permissions:
-- `read:packages`
-- `public_repo`
-
-**Export token to environment**
-```shell
-export GPR_KEY=<your_personal_access_token>
-```
-
-As an alternative to exporting the variable in your shell, you can pass the token inline when running Flutter:
-
-```shell
-GPR_KEY=<your_personal_access_token> flutter run
-```
-
-Without this variable, builds will fail when resolving GitHub Packages dependencies.
+The native AAR is downloaded automatically from https://olteanu2.github.io/maven, no token needed.
 
 ---
 
